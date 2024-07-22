@@ -13,9 +13,16 @@ const TodoApp = (TodoItemProps) => {
     setTodos(newTodos);
   };
 
+  const deleteTodo = (id) => {
+    const newTodos = new Map(todos);
+    newTodos.delete(id);
+
+    setTodos(newTodos);
+  };
+
   return (
     <>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onDelete={deleteTodo} />
       <TodoForm addTodo={addTodo} />
     </>
   );

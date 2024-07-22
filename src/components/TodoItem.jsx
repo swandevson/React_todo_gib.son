@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TodoItem = ({ text, isCompleted }) => {
+const TodoItem = ({ id, text, isCompleted, onDelete }) => {
   const [checked, setChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -8,7 +8,7 @@ const TodoItem = ({ text, isCompleted }) => {
   };
 
   const handleDeleteClick = () => {
-    // Implement delete functionality here
+    onDelete(id);
   };
 
   const [editing, setEditing] = useState(false);
