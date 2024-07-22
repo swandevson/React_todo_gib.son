@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
-const TodoItem = ({ text, isCompleted }) => {
-  const [checked, setChecked] = useState(false);
+const TodoItem = ({ id, text, isCompleted, onDelete, onEdit }) => {
+  const [isChecked, setIsChecked] = useState(isCompleted);
 
   const handleCheckboxChange = () => {
-    setChecked(!checked);
+    setIsChecked(!isChecked);
+    onEdit(id, text, isChecked);
   };
 
   const handleDeleteClick = () => {
-    // Implement delete functionality here
+    onDelete(id);
   };
 
   const [editing, setEditing] = useState(false);
@@ -19,6 +20,7 @@ const TodoItem = ({ text, isCompleted }) => {
   };
 
   const handleSaveClick = () => {
+    onEdit(id, editedText, isChecked);
     setEditing(false);
   };
 
@@ -26,17 +28,25 @@ const TodoItem = ({ text, isCompleted }) => {
     setEditedText(e.target.value);
   };
 
+  console.log(isCompleted);
   return (
     <li className="todo-item">
       <input
         type="checkbox"
-        checked={isCompleted}
+        checked={isChecked}
         onChange={handleCheckboxChange}
       />
       {editing ? (
         <input type="text" value={editedText} onChange={handleInputChange} />
       ) : (
-        <span>{text}</span>
+        <span
+          style={{
+            textDecoration: isChecked ? "line-through" : "none",
+            color: isChecked ? "gray" : "black",
+          }}
+        >
+          {text}
+        </span>
       )}
       {editing ? (
         <button onClick={handleSaveClick}>Save</button>
