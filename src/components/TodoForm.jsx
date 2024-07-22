@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 
-const TodoInput = () => {
+const TodoInput = ({ addTodo }) => {
   const [text, setText] = useState("");
 
   const handleSubmit = (event) => {
-    console.log(text);
     event.preventDefault();
+
+    if (text.trim()) {
+      addTodo(text.trim());
+    }
+
     setText("");
   };
 
