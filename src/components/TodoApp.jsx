@@ -1,8 +1,24 @@
 import React, { useState, useReducer } from "react";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
+import styled from "styled-components";
 
-const TodoApp = (TodoItemProps) => {
+const TodoContainer = styled.div`
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 70vh;
+  position: relative;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  background-color: #af82f0;
+  color: white;
+  padding: 10px;
+  margin: 0;
+`;
+
+const TodoApp = () => {
   const [todos, setTodos] = useState(new Map());
 
   const addTodo = (text) => {
@@ -29,8 +45,11 @@ const TodoApp = (TodoItemProps) => {
 
   return (
     <>
-      <TodoList todos={todos} onDelete={deleteTodo} onEdit={editTodo} />
-      <TodoForm addTodo={addTodo} />
+      <TodoContainer>
+        <Title>Todo List</Title>
+        <TodoForm addTodo={addTodo} />
+        <TodoList todos={todos} onDelete={deleteTodo} onEdit={editTodo} />
+      </TodoContainer>
     </>
   );
 };

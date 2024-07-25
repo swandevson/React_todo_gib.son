@@ -1,4 +1,42 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const TodoFormContainer = styled.div`
+  background: #495057;
+  font-size: 1.4rem;
+`;
+
+const TodoForm = styled.form`
+  display: flex;
+  width: 100%;
+`;
+
+const InputBox = styled.input`
+  flex: 1 1 90%;
+  font-size: 1.15rem;
+  padding: 15px;
+  border: none;
+  background: #495057;
+  color: white; /* Change the text color to white */
+  box-sizing: border-box;
+  &::placeholder {
+    color: #dee2e6;
+  }
+`;
+
+const SubmitButton = styled.button`
+  flex: 1 1 10%;
+  padding: 10px;
+  border: none;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+`;
+
+const SubmitButtonText = styled.h3`
+  margin: 0px;
+  padding: 0px;
+`;
 
 const TodoInput = ({ addTodo }) => {
   const [text, setText] = useState("");
@@ -18,32 +56,20 @@ const TodoInput = ({ addTodo }) => {
   };
 
   return (
-    <div>
-      <form id="todoInput" onSubmit={handleSubmit}>
-        <InputBox onType={handleType} text={text} />
-        <SubmitButton />
-      </form>
-    </div>
-  );
-};
-
-const InputBox = ({ onType, text }) => {
-  return (
-    <input
-      type="text"
-      placeholdear="할 일을 입력해주세요."
-      id="input-box"
-      onChange={onType}
-      value={text}
-    />
-  );
-};
-
-const SubmitButton = () => {
-  return (
-    <button type="submit" id="submit-button">
-      등록
-    </button>
+    <TodoFormContainer>
+      <TodoForm id="todo-form" onSubmit={handleSubmit}>
+        <InputBox
+          type="text"
+          placeholder="할 일을 입력해주세요."
+          id="input-box"
+          onChange={handleType}
+          value={text}
+        />
+        <SubmitButton type="submit" id="submit-button">
+          <SubmitButtonText>➕</SubmitButtonText>
+        </SubmitButton>
+      </TodoForm>
+    </TodoFormContainer>
   );
 };
 
