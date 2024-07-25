@@ -22,7 +22,8 @@ const todoReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TODO":
       const newAddTodos = new Map(state);
-      newAddTodos.set(action.payoad.id, {
+      const id = new Date().getTime();
+      newAddTodos.set(id, {
         text: action.payload.text,
         isCompleted: false,
       });
@@ -60,7 +61,7 @@ const TodoApp = () => {
 
   const addTodo = (text) => {
     const id = new Date().getTime();
-    dispatch({ type: "ADD_TODO", payload: { id, text } });
+    dispatch({ type: "ADD_TODO", payload: { text } });
   };
 
   const editTodo = (id, text, isCompleted) => {
