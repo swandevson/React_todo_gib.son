@@ -33,6 +33,7 @@ const TodoApp = () => {
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(Array.from(todos)));
+    console.log("aa");
   }, [todos]);
 
   const addTodo = (text) => {

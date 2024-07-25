@@ -59,23 +59,23 @@ const TodoItem = ({ id, text, isCompleted, onDelete, onEdit }) => {
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-    onEdit(id, text, isChecked);
+    onEdit(id, text, !isChecked);
   };
 
   const handleDeleteClick = () => {
     onDelete(id);
   };
 
-  const [editing, setEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(text);
 
   const handleEditClick = () => {
-    setEditing(true);
+    setIsEditing(true);
   };
 
   const handleSaveClick = () => {
     onEdit(id, editedText, isChecked);
-    setEditing(false);
+    setIsEditing(false);
   };
 
   const handleInputChange = (e) => {
@@ -89,7 +89,7 @@ const TodoItem = ({ id, text, isCompleted, onDelete, onEdit }) => {
         checked={isChecked}
         onChange={handleCheckboxChange}
       />
-      {editing ? (
+      {isEditing ? (
         <TextInput
           type="text"
           value={editedText}
@@ -98,7 +98,7 @@ const TodoItem = ({ id, text, isCompleted, onDelete, onEdit }) => {
       ) : (
         <Text $isChecked={isChecked}>{text}</Text>
       )}
-      {editing ? (
+      {isEditing ? (
         <Button
           onClick={handleSaveClick}
           //style={{ backgroundColor: "#28a745" }}
