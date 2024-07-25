@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 import styled from "styled-components";
@@ -18,48 +18,62 @@ const Title = styled.h1`
   margin: 0;
 `;
 
+const todoReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      const newAddTodos = new Map(state);
+      newAddTodos.set(action.payoad.id, {
+        text: action.payload.text,
+        isCompleted: false,
+      });
+      return newAddTodos;
+
+    case "EDIT_TODO":
+      const newEditTodos = new Map(state);
+      newEditTodos.set(action.payload.id, {
+        text: action.payload.text,
+        isCompleted: action.payload.isCompleted,
+      });
+      return newEditTodos;
+
+    case "DELETE_TODO":
+      const newDeleteTodos = new Map(state);
+      newDeleteTodos.delete(action.payload);
+      return newDeleteTodos;
+
+    default:
+      return state;
+  }
+};
+
 const TodoApp = () => {
-  const [todos, setTodos] = useState(() => {
+  const [todos, dispatch] = useReducer(todoReducer, [], () => {
     const savedTodos = localStorage.getItem("todos");
     const filteredTodos = new Map(
-      JSON.parse(savedTodos).filter(([key, value]) => !value.isCompleted)
+      JSON.parse(savedTodos).filter(([, value]) => !value.isCompleted)
     );
+
+    console.log(filteredTodos);
 
     return filteredTodos;
   });
 
-  useEffect(() => {
-    const storedTodos = localStorage.getItem("todos");
-    if (storedTodos) {
-      setTodos(new Map(JSON.parse(storedTodos)));
-    }
-  }, []);
+  const addTodo = (text) => {
+    const id = new Date().getTime();
+    dispatch({ type: "ADD_TODO", payload: { id, text } });
+  };
+
+  const editTodo = (id, text, isCompleted) => {
+    dispatch({ type: "EDIT_TODO", payload: { id, text, isCompleted } });
+  };
+
+  const deleteTodo = (id) => {
+    dispatch({ type: "DELETE_TODO", payload: id });
+  };
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(Array.from(todos)));
   }, [todos]);
-
-  const addTodo = (text) => {
-    const id = new Date().getTime();
-    const newTodos = new Map(todos);
-    newTodos.set(id, { text, isCompleted: false });
-
-    setTodos(newTodos);
-  };
-
-  const editTodo = (id, text, isCompleted) => {
-    const newTodos = new Map(todos);
-    newTodos.set(id, { text, isCompleted });
-
-    setTodos(newTodos);
-  };
-
-  const deleteTodo = (id) => {
-    const newTodos = new Map(todos);
-    newTodos.delete(id);
-
-    setTodos(newTodos);
-  };
 
   return (
     <>
