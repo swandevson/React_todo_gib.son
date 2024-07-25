@@ -4,7 +4,24 @@
 
 사용자로부터 할 일을 입력받아 추가하거나, 추가된 할 일을 완료, 수정 및 삭제를 수행할 수 있습니다.
 
-## 사용 가능한 스크립트
+# 시연 영상
+
+### 할 일 추가
+![등록](https://github.com/user-attachments/assets/70849618-4ef2-4514-81f8-67c79e0213e5)
+
+### 할 일 수정
+![수정](https://github.com/user-attachments/assets/0ef0cbdf-9113-4ab2-ad24-eb26f6264410)
+
+### 할 일 완료/미완료 체크
+![체크표시](https://github.com/user-attachments/assets/c756975f-abfd-45dc-bebd-8602f1a80cf8)
+
+### 할 일 삭제
+![삭제](https://github.com/user-attachments/assets/ef0f1620-2457-4682-b307-133a56079f52)
+
+
+
+
+## 프로젝트 시작하기
 
 프로젝트 디렉토리에서 다음을 실행할 수 있습니다:
 
@@ -30,12 +47,6 @@
 앱이 배포 준비가 되었습니다!
 
 자세한 정보는 [배포](https://facebook.github.io/create-react-app/docs/deployment) 섹션을 참조하세요.
-
-### `npm run eject`
-
-**참고: 이 작업은 일회성입니다. `eject`를 실행하면 되돌릴 수 없습니다!**
-
-빌드 도구와 구성 선택에 만족하지 않는 경우 언제든지 `eject`할 수 있습니다. 이 명령은 프로젝트에서 단일 빌드 종속성을 제거합니다.
 
 대신 모든 구성 파일과 종속성(webpack, Babel, ESLint 등)을 프로젝트로 직접 복사하여 완전한 제어를 할 수 있습니다. `eject`를 제외한 모든 명령은 여전히 작동하지만 복사된 스크립트를 가리키므로 조정할 수 있습니다. 이 시점에서 당신은 혼자입니다.
 
