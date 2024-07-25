@@ -99,26 +99,11 @@ const TodoItem = ({ id, text, isCompleted, onDelete, onEdit }) => {
         <Text $isChecked={isChecked}>{text}</Text>
       )}
       {isEditing ? (
-        <Button
-          onClick={handleSaveClick}
-          //style={{ backgroundColor: "#28a745" }}
-        >
-          💾
-        </Button>
+        <Button onClick={handleSaveClick}>💾</Button>
       ) : (
-        <Button
-          onClick={handleEditClick}
-          //style={{ backgroundColor: "skyblue" }}
-        >
-          ✏️
-        </Button>
+        <Button onClick={handleEditClick}>✏️</Button>
       )}
-      <Button
-        onClick={handleDeleteClick}
-        //style={{ backgroundColor: "#dc3545" }}
-      >
-        🗑️
-      </Button>
+      <Button onClick={handleDeleteClick}>🗑️</Button>
     </TodoListItem>
   );
 };

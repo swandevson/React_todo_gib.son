@@ -60,7 +60,6 @@ const TodoApp = () => {
   });
 
   const addTodo = (text) => {
-    const id = new Date().getTime();
     dispatch({ type: "ADD_TODO", payload: { text } });
   };
 
