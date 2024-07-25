@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 import styled from "styled-components";
@@ -19,7 +19,21 @@ const Title = styled.h1`
 `;
 
 const TodoApp = () => {
-  const [todos, setTodos] = useState(new Map());
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    return new Map(JSON.parse(savedTodos));
+  });
+
+  useEffect(() => {
+    const storedTodos = localStorage.getItem("todos");
+    if (storedTodos) {
+      setTodos(new Map(JSON.parse(storedTodos)));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(Array.from(todos)));
+  }, [todos]);
 
   const addTodo = (text) => {
     const id = new Date().getTime();

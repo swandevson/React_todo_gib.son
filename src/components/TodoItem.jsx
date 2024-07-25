@@ -60,7 +60,6 @@ const TodoItem = ({ id, text, isCompleted, onDelete, onEdit }) => {
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
     onEdit(id, text, isChecked);
-    console.log(isCompleted);
   };
 
   const handleDeleteClick = () => {

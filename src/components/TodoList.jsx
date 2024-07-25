@@ -16,8 +16,6 @@ const List = styled.ul`
   `;
 
 const TodoList = ({ todos, onDelete, onEdit }) => {
-  console.log([...todos.entries()]);
-
   return (
     <TodoListContainer>
       <List>
