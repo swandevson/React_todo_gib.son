@@ -21,7 +21,11 @@ const Title = styled.h1`
 const TodoApp = () => {
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos");
-    return new Map(JSON.parse(savedTodos));
+    const filteredTodos = new Map(
+      JSON.parse(savedTodos).filter(([key, value]) => !value.isCompleted)
+    );
+
+    return filteredTodos;
   });
 
   useEffect(() => {
@@ -33,7 +37,6 @@ const TodoApp = () => {
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(Array.from(todos)));
-    console.log("aa");
   }, [todos]);
 
   const addTodo = (text) => {
