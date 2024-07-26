@@ -44,7 +44,7 @@ const TodoInput = ({ addTodo }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (text.trim()) {
+    if (text.trim() || text == null) {
       addTodo(text.trim());
     }
 
@@ -64,6 +64,7 @@ const TodoInput = ({ addTodo }) => {
           id="input-box"
           onChange={handleType}
           value={text}
+          required={true}
         />
         <SubmitButton type="submit" id="submit-button">
           <SubmitButtonText>➕</SubmitButtonText>
