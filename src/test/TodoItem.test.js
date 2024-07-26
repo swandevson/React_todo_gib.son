@@ -4,24 +4,6 @@ import userEvent from "@testing-library/user-event";
 import TodoItem from "../components/TodoItem";
 
 // 래퍼 컴포넌트를 사용하여 상태 관리를 추가
-const TodoItemTestWrapper = ({ id, text, isCompleted, onDelete, onEdit }) => {
-  const [currentText, setCurrentText] = useState(text);
-
-  const handleEdit = (id, newText, isChecked) => {
-    setCurrentText(newText); // 상태 업데이트
-    onEdit(id, newText, isChecked);
-  };
-
-  return (
-    <TodoItem
-      id={id}
-      text={currentText}
-      isCompleted={isCompleted}
-      onDelete={onDelete}
-      onEdit={handleEdit}
-    />
-  );
-};
 
 test("할 일 체크에 따른 상태 변경 테스트", async () => {
   const todoText = "오늘의 할일";
@@ -39,19 +21,23 @@ test("할 일 체크에 따른 상태 변경 테스트", async () => {
   const checkbox = screen.getByRole("checkbox");
   const textElement = screen.getByText(todoText);
 
+  // 빈 체크 상자 클릭하여 상태 변경
   fireEvent.click(checkbox);
   expect(checkbox.checked).toBe(true);
-  expect(textElement).not.toHaveStyle({ "text-decoration": "none" });
+  expect(textElement).toHaveStyle({ "text-decoration": "line-through" });
+  expect(textElement).toHaveStyle({ color: "gray" });
 
+  // 체크된 체크 상자 클릭하여 상태 변경
   fireEvent.click(checkbox);
   expect(checkbox.checked).toBe(false);
   expect(textElement).toHaveStyle({ "text-decoration": "none" });
+  expect(textElement).toHaveStyle({ color: "black" });
 });
 
 test("할 일 수정 상태변경 테스트", async () => {
   const mockOnEdit = jest.fn();
   await render(
-    <TodoItemTestWrapper
+    <TodoItem
       id={1}
       text="Test Todo"
       isCompleted={false}
@@ -89,7 +75,7 @@ test("할 일 수정 상태변경 테스트", async () => {
 test("할 일 삭제 호출 테스트", async () => {
   const mockOnDelete = jest.fn();
   await render(
-    <TodoItemTestWrapper
+    <TodoItem
       id={1}
       text="Test Todo"
       isCompleted={false}
