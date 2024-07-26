@@ -19,9 +19,6 @@ const Checkbox = styled.input`
 
 const TextInput = styled.input`
   flex: 1;
-  text-decoration: ${({ $isChecked }) =>
-    $isChecked ? "line-through" : "none"};
-  color: ${({ $isChecked }) => ($isChecked ? "gray" : "black")};
 `;
 
 const Text = styled.span`
