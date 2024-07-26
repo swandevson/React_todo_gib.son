@@ -50,6 +50,10 @@ const todoReducer = (state, action) => {
 const TodoApp = () => {
   const [todos, dispatch] = useReducer(todoReducer, [], () => {
     const savedTodos = localStorage.getItem("todos");
+
+    if (!savedTodos) {
+      return new Map();
+    }
     const filteredTodos = new Map(
       JSON.parse(savedTodos).filter(([, value]) => !value.isCompleted)
     );
