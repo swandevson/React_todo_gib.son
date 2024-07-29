@@ -95,7 +95,7 @@ const TodoItem = ({ id, text, isCompleted, onDelete, onEdit }) => {
       ) : (
         <Text $isChecked={isChecked}>{text}</Text>
       )}
-      {isEditing ? (
+      {isEditing ? ( // todo 수정 여부에 따른 버튼 및 onClick 함수 할당을 다르게 함
         <Button onClick={handleSaveClick}>💾</Button>
       ) : (
         <Button onClick={handleEditClick}>✏️</Button>

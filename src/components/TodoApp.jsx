@@ -18,6 +18,13 @@ const Title = styled.h1`
   margin: 0;
 `;
 
+/**
+ * todos의 상태를 관리하기 위한 reducer hooks
+ *
+ * @param {Map} state - 현재 todos의 상태
+ * @param {Object} action - 상태 변경을 나타내는 액션 객체
+ * @returns {Map} - 새로운 todos의 상태
+ */
 const todoReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TODO":
@@ -49,16 +56,14 @@ const todoReducer = (state, action) => {
 
 const TodoApp = () => {
   const [todos, dispatch] = useReducer(todoReducer, [], () => {
-    const savedTodos = localStorage.getItem("todos");
+    const savedTodos = localStorage.getItem("todos"); // local storage에 저장된 todo가 있다면 불러오기
 
     if (!savedTodos) {
       return new Map();
     }
     const filteredTodos = new Map(
-      JSON.parse(savedTodos).filter(([, value]) => !value.isCompleted)
+      JSON.parse(savedTodos).filter(([, value]) => !value.isCompleted) // 완료된 todo는 삭제
     );
-
-    console.log(filteredTodos);
 
     return filteredTodos;
   });

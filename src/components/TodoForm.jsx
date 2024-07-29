@@ -45,7 +45,7 @@ const TodoInput = ({ addTodo }) => {
     event.preventDefault();
 
     if (text.trim() || text == null) {
-      addTodo(text.trim());
+      addTodo(text.trim()); // 입력받은 내용으로 todo 추가
     }
 
     setText("");
